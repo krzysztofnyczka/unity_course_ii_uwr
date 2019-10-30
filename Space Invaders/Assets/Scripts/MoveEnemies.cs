@@ -29,14 +29,18 @@ public class MoveEnemies : MonoBehaviour
 
     public TextMeshProUGUI points, hp;
 
+    public AudioSource hit;
+
     private void Awake()
     {
         Instance = this;
     }
 
+
     public void HurtPlayer()
     {
         lives -= 1;
+        hit.Play();
         hp.text = "HP: " + lives;
         if(lives <= 0)
         {
@@ -63,6 +67,8 @@ public class MoveEnemies : MonoBehaviour
 
     void Start()
     {
+
+        hit = GetComponent<AudioSource>();
         lives = 3;
         hp.text = "HP: " + lives;
         points.text = "Points: " + killedEnemies;
